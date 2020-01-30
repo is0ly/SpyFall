@@ -10,8 +10,8 @@
 		<script src="./data.js"></script>
 		<script src="./functions.js"></script>
 		<script>
-			const width = 6;
-			const height = 4;
+			const width = 600;
+			const height = 400;
 			const key = getEncryptionKey();
 			console.log("Ключ шифрования", key);
 
@@ -60,14 +60,14 @@
 
                     secretPixelArray.push(digit);
 
-                    console.log(secretPixelArray);
+                    //console.log(secretPixelArray);
 
-						for (let index = 0; index < digit.length - 1; index++) {
-							// digit = key.charCodeAt(i % key.length);
-							console.log("Here!");
+						for (let index = 0; index < secretPixelArray.length - 1; index++) {
+							digit = key.charCodeAt(i % key.length);
+							//console.log("Here!");
 						}
 
-						console.log(digit.length);
+						//console.log(digit.length);
 
 						// console.log(digit);
 						// let digitG = parseInt(binaryG, 2);
