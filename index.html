@@ -52,11 +52,15 @@
 						// console.log("BinG", binaryG);
 						// console.log("BinB", binaryB);
 
-						// SecretPixelArray = binary.split("");
+						
 
 						// console.log(SecretPixelArray);
 
 						let digit = parseInt(binaryR + binaryG + binaryB, 2);
+
+                    secretPixelArray.push(digit);
+
+                    console.log(secretPixelArray);
 
 						for (let index = 0; index < digit.length - 1; index++) {
 							// digit = key.charCodeAt(i % key.length);
