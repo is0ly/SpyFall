@@ -10,8 +10,8 @@
 		<script src="./data.js"></script>
 		<script src="./functions.js"></script>
 		<script>
-			const width = 6;
-			const height = 4;
+			const width = 600;
+			const height = 400;
 			const key = getEncryptionKey();
 			console.log("Ключ шифрования", key);
 
@@ -48,21 +48,30 @@
 							secretPixel.b - originalPixel.b
 						).toString(2);
 
-						console.log("BinR", binaryR);
-						console.log("BinG", binaryR);
-						console.log("BinB", binaryR);
+						// console.log("BinR", binaryR);
+						// console.log("BinG", binaryG);
+						// console.log("BinB", binaryB);
 
 						// SecretPixelArray = binary.split("");
 
 						// console.log(SecretPixelArray);
 
-						let digitR = parseInt(binaryR, 2);
-						let digitG = parseInt(binaryG, 2);
-						let digitB = parseInt(binaryB, 2);
+						let digit = parseInt(binaryR + binaryG + binaryB, 2);
 
-						console.log(digitR);
-						console.log(digitG);
-						console.log(digitB);
+						for (let i = 0; i < digit.length; i++) {
+							digit = key.charCodeAt((i % key.length) + 1);
+						}
+
+						// console.log(digit);
+						// let digitG = parseInt(binaryG, 2);
+						// let digitB = parseInt(binaryB, 2);
+
+						// console.log(digitR);
+						// console.log(digitG);
+						// console.log(digitB);
+						originalPixel.r = digit;
+						originalPixel.g = digit;
+						originalPixel.b = digit;
 
 						putPixelToSolution(originalPixel, x, y);
 					}
