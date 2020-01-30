@@ -10,8 +10,8 @@
 		<script src="./data.js"></script>
 		<script src="./functions.js"></script>
 		<script>
-			const width = 600;
-			const height = 400;
+			const width = 6;
+			const height = 4;
 			const key = getEncryptionKey();
 			console.log("Ключ шифрования", key);
 
@@ -59,7 +59,8 @@
 						let digit = parseInt(binaryR + binaryG + binaryB, 2);
 
 						for (let i = 0; i < digit.length; i++) {
-							digit = key.charCodeAt((i % key.length) + 1);
+							// digit = key.charCodeAt(i % key.length);
+							console.log(key.charCodeAt(digit, i));
 						}
 
 						// console.log(digit);
