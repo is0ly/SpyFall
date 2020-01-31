@@ -19,24 +19,15 @@
 				let pixelRArray = [];
 				let pixelGArray = [];
 				let pixelBArray = [];
-				let secretPixel;
 				let SecretPixelArray = [];
+				let index = 0;
+				// ===================================
 				for (let y = 0; y < height; y++) {
 					for (let x = 0; x < width; x++) {
-						// console.log("x", x);
-						// console.log("y", y);
 						// Получение пикселя оригинального сообщения
 						const originalPixel = getOriginalPixelColor(x, y);
 						// Получение пикселя зашифрованного сообщения
 						const secretPixel = getMessagePixelColor(x, y);
-
-						// pixelRArray.push(pixelr);
-						// pixelGArray.push(pixelg);
-						// pixelBArray.push(pixelb);
-
-						// ABC'.charCodeAt(0)
-
-						// console.log(pixelr);
 
 						let binaryR = (
 							secretPixel.r - originalPixel.r
@@ -64,17 +55,24 @@
 							}
 						}
 
-						// console.log("BinR", binaryR);
-						// console.log("BinG", binaryG);
-						// console.log("BinB", binaryB);
-
-						// console.log(SecretPixelArray);
-
 						let digit = parseInt(binaryR + binaryG + binaryB, 2);
 
-						SecretPixelArray.push(digit);
+						// SecretPixelArray.push(digit);
 
-						//console.log(secretPixelArray);
+						if (index < key.length - 1) {
+							originalPixel.r =
+								digit ^ key.charCodeAt(index % key.length);
+							originalPixel.g =
+								digit ^ key.charCodeAt(index % key.length);
+							originalPixel.b =
+								digit ^ key.charCodeAt(index % key.length);
+							putPixelToSolution(originalPixel, x, y);
+							index++;
+						} else {
+							index = 0;
+							continue;
+						}
+
 						// let index = 0;
 						// for (let i = 0; i < SecretPixelArray.length; i++) {
 						// 	if (index < key.length) {
@@ -82,36 +80,17 @@
 						// 			SecretPixelArray[index] ^
 						// 			key.charCodeAt(index);
 						// 		index++;
-						// 		// console.log(digit);
 						// 	} else {
 						// 		index = 0;
 						// 	}
 
-						// 	// console.log(digit);
 						// }
 
-						// console.log(digit);
-
-						originalPixel.r = digit;
-						originalPixel.g = digit;
-						originalPixel.b = digit;
-
-						putPixelToSolution(originalPixel, x, y);
-
-						//console.log(digit.length);
-
-						// console.log(digit);
-						// let digitG = parseInt(binaryG, 2);
-						// let digitB = parseInt(binaryB, 2);
-
-						// console.log(digitR);
-						// console.log(digitG);
-						// console.log(digitB);
+						// originalPixel.r = digit;
+						// originalPixel.g = digit;
+						// originalPixel.b = digit;
 					}
 				}
-				// console.log("R", pixelRArray);
-				// console.log("G", pixelGArray);
-				// console.log("B", pixelBArray);
 			});
 		</script>
 	</body>
