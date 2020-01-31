@@ -10,8 +10,8 @@
 		<script src="./data.js"></script>
 		<script src="./functions.js"></script>
 		<script>
-			const width = 300;
-			const height = 200;
+			const width = 600;
+			const height = 400;
 			const key = getEncryptionKey();
 			console.log("Ключ шифрования", key);
 
@@ -21,8 +21,8 @@
 				let pixelBArray = [];
 				let secretPixel;
 				let SecretPixelArray = [];
-				for (let x = 0; x < width; x++) {
-					for (let y = 0; y < height; y++) {
+				for (let y = 0; y < height; y++) {
+					for (let x = 0; x < width; x++) {
 						// console.log("x", x);
 						// console.log("y", y);
 						// Получение пикселя оригинального сообщения
@@ -48,6 +48,22 @@
 							secretPixel.b - originalPixel.b
 						).toString(2);
 
+						for (let i = 0; i < 3; i++) {
+							if (binaryB < 3) {
+								binaryB = 0 + binaryB;
+							}
+						}
+						for (let i = 0; i < 3; i++) {
+							if (binaryG < 3) {
+								binaryG = 0 + binaryG;
+							}
+						}
+						for (let i = 0; i < 3; i++) {
+							if (binaryR < 2) {
+								binaryR = 0 + binaryR;
+							}
+						}
+
 						// console.log("BinR", binaryR);
 						// console.log("BinG", binaryG);
 						// console.log("BinB", binaryB);
@@ -59,14 +75,28 @@
 						SecretPixelArray.push(digit);
 
 						//console.log(secretPixelArray);
+						// let index = 0;
+						// for (let i = 0; i < SecretPixelArray.length; i++) {
+						// 	if (index < key.length) {
+						// 		digit =
+						// 			SecretPixelArray[index] ^
+						// 			key.charCodeAt(index);
+						// 		index++;
+						// 		// console.log(digit);
+						// 	} else {
+						// 		index = 0;
+						// 	}
 
-						for (
-							let index = 0;
-							index < SecretPixelArray.length - 1;
-							index++
-						) {
-							digit = key.charCodeAt(index % key.length);
-						}
+						// 	// console.log(digit);
+						// }
+
+						// console.log(digit);
+
+						originalPixel.r = digit;
+						originalPixel.g = digit;
+						originalPixel.b = digit;
+
+						putPixelToSolution(originalPixel, x, y);
 
 						//console.log(digit.length);
 
@@ -77,11 +107,6 @@
 						// console.log(digitR);
 						// console.log(digitG);
 						// console.log(digitB);
-						originalPixel.r = digit;
-						originalPixel.g = digit;
-						originalPixel.b = digit;
-
-						putPixelToSolution(originalPixel, x, y);
 					}
 				}
 				// console.log("R", pixelRArray);
